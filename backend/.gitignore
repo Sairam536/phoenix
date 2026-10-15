@@ -1,0 +1,39 @@
+# ==============================================================================
+# DOCUMIND AI — Backend Service Git Ignore
+# ==============================================================================
+
+# Environment variables & secrets
+.env
+.env.*
+*.env
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+
+# Uploads & temporary storage
+uploads/
+!uploads/.gitkeep
+tmp/
+temp/
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

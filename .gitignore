@@ -1,44 +1,164 @@
-# Dependencies
-node_modules
-.pnp
-.pnp.js
+# ==============================================================================
+# DOCUMIND AI — Git Ignore Configuration
+# ==============================================================================
 
-# Testing
-coverage
-.nyc_output
-
-# Production builds
-dist
-build
-.next
-out
-
-# Environment variables & secrets
+# ------------------------------------------------------------------------------
+# 1. Environment Variables & Secret Credentials (NEVER COMMIT)
+# ------------------------------------------------------------------------------
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+*.env.backup
+*.env.prod
+*.env.dev
+*.env.stage
+
+# Explicitly allow committing template files
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# Private cryptographic keys & certificates
 *.pem
 *.key
+*.cert
+*.crt
+*.pfx
+*.p12
+*.keystore
+id_rsa*
+id_ed25519*
+service-account*.json
+credentials.json
+client_secret*.json
 
-# Logs
+# ------------------------------------------------------------------------------
+# 2. Dependencies & Package Managers
+# ------------------------------------------------------------------------------
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+jspm_packages/
+.pnp
+.pnp.js
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# ------------------------------------------------------------------------------
+# 3. Production Build Artifacts & Caches
+# ------------------------------------------------------------------------------
+dist/
+dist-ssr/
+backend/dist/
+frontend/dist/
+build/
+out/
+.next/
+.turbo/
+.cache/
+.vite/
+frontend/.vite/
+backend/.vite/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# ------------------------------------------------------------------------------
+# 4. Runtime Uploads, Storage & Scratch Data
+# ------------------------------------------------------------------------------
+uploads/
+backend/uploads/
+!backend/uploads/.gitkeep
+storage/
+tmp/
+temp/
+scratch/
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.tar
+*.tar.gz
+*.zip
+*.bak
+
+# ------------------------------------------------------------------------------
+# 5. Testing, Code Coverage & Automation Artifacts
+# ------------------------------------------------------------------------------
+coverage/
+backend/coverage/
+frontend/coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+vitest.results.json
+
+# ------------------------------------------------------------------------------
+# 6. Runtime Logs & Process Identifiers
+# ------------------------------------------------------------------------------
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
 
-# Editor & OS files
+# ------------------------------------------------------------------------------
+# 7. Operating System Files
+# ------------------------------------------------------------------------------
+# macOS
 .DS_Store
-Thumbs.db
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-.idea
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
 
-# Temporary & cache
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ------------------------------------------------------------------------------
+# 8. IDE & Code Editor Configurations
+# ------------------------------------------------------------------------------
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
 .eslintcache
-.turbo
-*.tsbuildinfo
+.stylelintcache
+.prettiercache
+
+# VS Code (preserve workspace recommended extensions/settings if present)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
