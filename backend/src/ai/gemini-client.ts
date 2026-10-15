@@ -43,7 +43,19 @@ export class GeminiService {
         return validation.data;
       } catch (err) {
         lastError = err as Error;
-        logger.warn({ attempt, maxRetries, taskName, error: lastError.message }, 'Gemini API call failed, retrying...');
+        logger.warn({ attempt, maxRetries, taskName, error: lastError.message }, 'Gemini API call failed');
+
+        // If model not found, unsupported, quota exceeded, or key issue, fall back immediately
+        if (
+          lastError.message?.includes('not found') ||
+          lastError.message?.includes('404') ||
+          lastError.message?.includes('NOT_FOUND') ||
+          lastError.message?.includes('API_KEY') ||
+          lastError.message?.includes('unsupported')
+        ) {
+          logger.warn({ taskName }, 'Gemini model or credential issue. Falling back immediately to heuristic.');
+          break;
+        }
 
         if (attempt < maxRetries) {
           const delay = Math.min(1000 * Math.pow(2, attempt) + Math.random() * 500, 10000);
