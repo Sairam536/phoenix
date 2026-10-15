@@ -15,6 +15,14 @@ declare
   v_ext_inv1 uuid := '33333333-3333-3333-3333-333333333331';
   v_ext_po1 uuid := '33333333-3333-3333-3333-333333333332';
 begin
+  -- 0. Insert demo users into auth.users so foreign keys and logins succeed
+  insert into auth.users (id, instance_id, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, role, aud)
+  values 
+    ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', 'admin@apexlogistics.demo', crypt('Password123!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"full_name":"Alex Rivera (Owner)"}'::jsonb, now(), now(), 'authenticated', 'authenticated'),
+    ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000', 'reviewer@apexlogistics.demo', crypt('Password123!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"full_name":"Taylor Chen (Reviewer)"}'::jsonb, now(), now(), 'authenticated', 'authenticated'),
+    ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000000', 'member@apexlogistics.demo', crypt('Password123!', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}'::jsonb, '{"full_name":"Sam Morgan (Member)"}'::jsonb, now(), now(), 'authenticated', 'authenticated')
+  on conflict (id) do nothing;
+
   -- 1. Organization
   insert into public.organizations (id, name, slug, created_by, settings)
   values (
