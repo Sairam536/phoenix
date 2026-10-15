@@ -157,9 +157,9 @@ phoenix/
 │
 ├── supabase/
 │   ├── migrations/
-│   │   ├── 20261015000001_create_schema.sql    # 12 Relational tables & triggers
-│   │   └── 20261015000002_functions_and_rls.sql# RLS policies & atomic queue functions
-│   └── seed.sql                        # Enterprise test dataset (Apex Logistics)
+│   │   └── 20261015000001_init_all_tables.sql  # Single-run master migration (all 12 tables, RLS, functions & seed)
+│   ├── supabase.sql                    # SQL Editor single-run copy-paste master script
+│   └── seed.sql                        # Standalone synthetic dataset (Apex Logistics)
 │
 └── docs/                               # Deep technical documentation
     ├── architecture.md                 # System design & data flow
@@ -257,21 +257,19 @@ VITE_ENABLE_DEMO_ACCOUNTS=true
 
 ### Database & Storage Setup (Supabase)
 
-If deploying with Supabase Cloud or a local Supabase CLI instance:
+If deploying with Supabase Cloud or a local Supabase instance, everything runs in a **single run**:
 
-1. Apply the schema migration:
-   ```bash
-   cat supabase/migrations/20261015000001_create_schema.sql | psql "$SUPABASE_DB_URL"
-   ```
-2. Apply the RLS and queue functions:
-   ```bash
-   cat supabase/migrations/20261015000002_functions_and_rls.sql | psql "$SUPABASE_DB_URL"
-   ```
-3. Load the pre-configured enterprise seed dataset:
-   ```bash
-   cat supabase/seed.sql | psql "$SUPABASE_DB_URL"
-   ```
-4. Create a private bucket named `documents` in Supabase Storage.
+#### Option 1: Supabase Web Dashboard (Recommended)
+1. Open your Supabase project dashboard -> **SQL Editor**.
+2. Copy the entire contents of [`supabase/supabase.sql`](file:///c:/Users/VENKATA%20SAI%20RAM/Desktop/phoenix/supabase/supabase.sql).
+3. Paste and click **RUN**.
+   - This creates all 12 tables, indexes, automatic triggers, RLS policies, storage bucket, and pre-seeds the demo dataset in a single execution.
+
+#### Option 2: Supabase CLI / psql
+Apply the single master migration:
+```bash
+cat supabase/migrations/20261015000001_init_all_tables.sql | psql "$SUPABASE_DB_URL"
+```
 
 ### Running the Applications
 
