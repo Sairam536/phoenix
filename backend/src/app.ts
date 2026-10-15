@@ -19,10 +19,27 @@ app.use(
   })
 );
 
-// CORS configuration
+// CORS configuration (supports local dev, configured FRONTEND_URL, and Vercel domains)
+const allowedOrigins = [
+  env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'https://frontend-beryl-ten-26.vercel.app',
+];
+
 app.use(
   cors({
-    origin: [env.FRONTEND_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        env.NODE_ENV !== 'production'
+      ) {
+        return callback(null, true);
+      }
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Organization-Id', 'X-Request-Id'],
@@ -46,6 +63,11 @@ app.use(
 
 // Standard rate limiter for all general routes
 app.use(standardRateLimiter);
+
+// Root health check for cloud platforms (Render, Fly.io, etc.)
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', service: 'documind-api', timestamp: new Date().toISOString() });
+});
 
 // Mount versioned API
 app.use(env.API_BASE_PATH, apiRouter);
