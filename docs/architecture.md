@@ -2,10 +2,9 @@
 
 ## 1. Executive Summary
 
-DocuMind AI is architected as a modular, decoupled, event-driven Intelligent Document Processing (IDP) and cross-document Knowledge Discovery platform. The system operates in a monorepo containing three core packages:
-- `@documind/shared`: TypeScript definitions, Zod schemas, validation contracts, and domain constants.
-- `@documind/server`: Node.js/Express API service with background worker queues, Gemini AI connectors, deterministic financial calculators, and OCR parsing engines.
-- `@documind/web`: React 18 Single Page Application built on Vite, Tailwind CSS, and TanStack Query.
+DocuMind AI is architected as a modular, decoupled, event-driven Intelligent Document Processing (IDP) and cross-document Knowledge Discovery platform. The system operates as two standalone, decoupled applications:
+- `backend/`: Node.js/Express API service with background worker queues, Gemini AI connectors (`@google/genai`), deterministic financial calculators, and OCR parsing engines.
+- `frontend/`: React 18 Single Page Application built on Vite, Tailwind CSS, and TanStack Query.
 
 ---
 
