@@ -7,7 +7,10 @@
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC.svg)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL%20RLS-3ECF8E.svg)](https://supabase.com/)
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-%40google%2Fgenai-orange.svg)](https://ai.google.dev/)
-[![Tests Passing](https://img.shields.io/badge/Tests-28%20Passed-success.svg)](#testing)
+[![Tests Passing](https://img.shields.io/badge/Tests-33%20Passed-success.svg)](#testing)
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Sairam536/phoenix)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Sairam536/phoenix&root-directory=frontend)
 
 **DocuMind AI** is an enterprise-grade Intelligent Document Processing (IDP) and cross-document Knowledge Discovery platform. It transforms unstructured business documents (Invoices, Purchase Orders, Master Services Agreements, Receipts, Compliance Reports) into structured, mathematically validated, audited data records with grounded provenance, automated 2-way reconciliation, and conversational knowledge exploration.
 
